@@ -34,7 +34,42 @@ function init(){
     guessList =[]
     isWinner = false
     secretNum = Math.floor(Math.random() *100 +1)
+    render()
 }
+function render(){
+    const lastGuess = guessList[guessList.length -1]
+    const div = document.createElement("div")
+    div.innerText = lastGuess
+    
+    if (guessList.length ===1){
+        prevGuessMsg.innerText = "Previous Guesses:"
+        resetBtn.removeAttribute("hidden")
+    }
+    if (isWinner){
+        renderWin(div)
+    }else if (lastGuess > secretNum || lastGuess <secretNum){
+        renderGuess(div, lastGuess)
+    }
+}
+
+
+
+function renderError(error){
+    messageEl.className = "error"
+    messageEl.innerText = error
+}
+
+function renderWin (div){
+    messageEl.className = "winner"
+    div.className = "winner"
+    guessesEl.appendChild(div) 
+    if (guessList.length === 1 ){
+        messageEl.innerText = 'You found the number in one guess!'
+    }else{
+        messageEl.innerText ='Congratulations! You found the number ${secretNum} in ${guess.length} guesses!'
+    }
+    }
+
 
 function checkGuess(guess) {
     guessInput.value =""
