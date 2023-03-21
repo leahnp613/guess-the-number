@@ -39,8 +39,11 @@ function init(){
 function checkGuess(guess) {
     guessInput.value =""
     if (isNaN (guess) || guess > 100) {    
+        renderError("Whoops! Please enter a number from 1 to 100.")
+        return
     } else if (guess ===secretNum) {
-    
+      isWinner = true
     }guessList.push(guess)
+    render()
 }
 
