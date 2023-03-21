@@ -16,6 +16,12 @@ const prevGuessMsg = document.querySelector("#prev-guesses-msg")
 
 /*--------------------------Event Listeners----------------------------*/
 form.addEventListener("reset", init)
+form.addEventListener("submit", function (evt){
+    evt. preventDefault()
+    if (isWinner === false){
+        checkGuess(parseInt(guessInput.value))
+    }
+})
 
 /*-------------------------Functions------------------------------------*/
 init();
@@ -28,5 +34,13 @@ function init(){
     guessList =[]
     isWinner = false
     secretNum = Math.floor(Math.random() *100 +1)
+}
+
+function checkGuess(guess) {
+    guessInput.value =""
+    if (isNaN (guess) || guess > 100) {    
+    } else if (guess ===secretNum) {
+    
+    }guessList.push(guess)
 }
 
