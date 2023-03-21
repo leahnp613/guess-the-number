@@ -71,6 +71,20 @@ function renderWin (div){
     }
 
 
+function renderGuess(div, lastGuess){
+    if (lastGuess <secretNum) {
+        messageEl.className ="low"
+        div.className ="low"
+        messageEl.innerText= '${lastGuess} is too low, please try again!'
+    }else if (lastGuess > secretNum) {
+        messageEl.className ="high"
+        div.className ="high"
+        messageEl.innerText = '${lastGuess} is too high, please try again!'
+    }
+    guessesEl.appendChild(div)
+    }
+
+
 function checkGuess(guess) {
     guessInput.value =""
     if (isNaN (guess) || guess > 100) {    
