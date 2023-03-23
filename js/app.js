@@ -13,6 +13,7 @@ const guessInput = document.querySelector("#guess-input")
 const guessesEl = document.querySelector("#prev-guesses")
 const messageEl = document.querySelector("#reset-button")
 const prevGuessMsg = document.querySelector("#prev-guesses-msg")
+const resetBtn = document.querySelector("#reset-button")
 
 /*--------------------------Event Listeners----------------------------*/
 form.addEventListener("reset", init)
@@ -27,6 +28,7 @@ form.addEventListener("submit", function (evt){
 init();
 
 function init(){
+    messageEl.className = ""
     guessesEl.innerText=""
     messageEl.innerText= "Please enter a number from 1 to 100"
     resetBtn.setAttribute("hidden", true)
@@ -34,6 +36,7 @@ function init(){
     guessList =[]
     isWinner = false
     secretNum = Math.floor(Math.random() *100 +1)
+    console.log(secretNum)
     render()
 }
 function render(){
@@ -66,7 +69,7 @@ function renderWin (div){
     if (guessList.length === 1 ){
         messageEl.innerText = 'You found the number in one guess!'
     }else{
-        messageEl.innerText ='Congratulations! You found the number ${secretNum} in ${guess.length} guesses!'
+        messageEl.innerText =`Congratulations! You found the number ${secretNum} in ${guessList.length} guesses`
     }
     }
 
@@ -75,11 +78,11 @@ function renderGuess(div, lastGuess){
     if (lastGuess <secretNum) {
         messageEl.className ="low"
         div.className ="low"
-        messageEl.innerText= '${lastGuess} is too low, please try again!'
+        messageEl.innerText= `${lastGuess} is too low, please try again!`
     }else if (lastGuess > secretNum) {
         messageEl.className ="high"
         div.className ="high"
-        messageEl.innerText = '${lastGuess} is too high, please try again!'
+        messageEl.innerText = `${lastGuess} is too high, please try again!`
     }
     guessesEl.appendChild(div)
     }
@@ -87,7 +90,7 @@ function renderGuess(div, lastGuess){
 
 function checkGuess(guess) {
     guessInput.value =""
-    if (isNaN (guess) || guess > 100) {    
+    if (isNaN (guess) || guess < 1  || guess >100) {    
         renderError("Whoops! Please enter a number from 1 to 100.")
         return
     } else if (guess ===secretNum) {
